@@ -5,11 +5,11 @@ export const fieldGroups = {
     "alignment": { type: "text" },
     "className": { type: "number" },
     "level": { type: "number", locked: true },
-    
     "xp": { type: "number" }
   },
   
   "hp": {
+    "ac": { type: "number", locked: false },
     "thac0": { type: "number", locked: true },
     "hp": { type: "number" },
     "hpMax": { type: "number", locked: true },  
