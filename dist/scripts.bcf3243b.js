@@ -34096,18 +34096,13 @@ var deleteRecord = function deleteRecord(recordId) {
 };
 
 exports.deleteRecord = deleteRecord;
-},{"axios":"../node_modules/axios/index.js"}],"scripts/components/CharacterSheet.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js"}],"scripts/constants/char.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+exports.fieldGroups = void 0;
 var fieldGroups = {
   "basic": {
     "player": {
@@ -34116,11 +34111,15 @@ var fieldGroups = {
     "name": {
       type: "number"
     },
+    "alignment": {
+      type: "text"
+    },
     "className": {
       type: "number"
     },
     "level": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "xp": {
       type: "number"
@@ -34131,78 +34130,160 @@ var fieldGroups = {
       type: "number"
     },
     "hpMax": {
-      type: "number"
+      type: "number",
+      locked: true
     }
   },
   "attributes": {
     "str": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "int": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "wis": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "dex": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "con": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "cha": {
-      type: "number"
+      type: "number",
+      locked: true
     }
   },
   "saves": {
     "poison": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "wand": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "paralysis": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "breath": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "magic": {
-      type: "number"
+      type: "number",
+      locked: true
     }
   },
   "explore": {
     "search": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "openDoor": {
-      type: "number"
+      type: "number",
+      locked: true
     },
     "listen": {
-      type: "number"
+      type: "number",
+      locked: true
     }
   },
+  "money": {
+    "platinum": "",
+    "gold": "",
+    "electrum": "",
+    "silver": "",
+    "copper": ""
+  },
   "equipment": {
-    "backpack": {
-      type: "textarea"
+    "carried": {
+      label: "Equipment carried",
+      type: "textarea",
+      expanded: true
     },
     "stash": {
-      type: "textarea"
+      label: "Equipment stashed",
+      type: "textarea",
+      expanded: true
+    }
+  },
+  "other": {
+    "notes": {
+      label: "Other notes",
+      type: "textarea",
+      expanded: true
     }
   }
 };
+exports.fieldGroups = fieldGroups;
+},{}],"scripts/components/CharacterSheet.js":[function(require,module,exports) {
+"use strict";
 
-var FieldGroup = function FieldGroup(_ref) {
-  var fields = _ref.fields,
-      char = _ref.char,
-      _ref$onChangeField = _ref.onChangeField,
-      onChangeField = _ref$onChangeField === void 0 ? function () {} : _ref$onChangeField;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _char = require("../constants/char");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var Field = function Field(_ref) {
+  var _ref$locked = _ref.locked,
+      locked = _ref$locked === void 0 ? false : _ref$locked,
+      type = _ref.type,
+      otherProps = _objectWithoutProperties(_ref, ["locked", "type"]);
+
+  var fieldProps = _objectSpread(_objectSpread({}, otherProps), {}, {
+    className: "input-field" // disabled: locked
+
+  });
+
+  switch (type) {
+    case "textarea":
+      return /*#__PURE__*/_react.default.createElement("textarea", fieldProps);
+
+    default:
+      return /*#__PURE__*/_react.default.createElement("input", fieldProps);
+  }
+};
+
+var FieldList = function FieldList(_ref2) {
+  var fields = _ref2.fields,
+      char = _ref2.char,
+      _ref2$onChangeField = _ref2.onChangeField,
+      onChangeField = _ref2$onChangeField === void 0 ? function () {} : _ref2$onChangeField;
   return Object.keys(fields).map(function (attr, i) {
+    var isExpanded = fields[attr].expanded ? "is-expanded" : "";
+    var classNames = "input-group ".concat(isExpanded);
     return /*#__PURE__*/_react.default.createElement("div", {
+      className: classNames,
       key: i
     }, /*#__PURE__*/_react.default.createElement("label", {
       className: "input-label"
-    }, attr), /*#__PURE__*/_react.default.createElement("input", {
+    }, fields[attr].label || attr), /*#__PURE__*/_react.default.createElement(Field, {
+      locked: fields[attr].locked,
+      type: fields[attr].type,
       defaultValue: char[attr],
       onChange: function onChange(e) {
         return onChangeField(attr, e.target.value);
@@ -34211,23 +34292,29 @@ var FieldGroup = function FieldGroup(_ref) {
   });
 };
 
-var CharacterSheet = function CharacterSheet(_ref2) {
-  var char = _ref2.char,
-      onChangeField = _ref2.onChangeField;
-  return Object.keys(fieldGroups).map(function (groupName, i) {
+var CharacterSheet = function CharacterSheet(_ref3) {
+  var char = _ref3.char,
+      onChangeField = _ref3.onChangeField;
+  var fieldGroupsEl = Object.keys(_char.fieldGroups).map(function (groupName, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
+      className: "field-group",
       key: i
-    }, /*#__PURE__*/_react.default.createElement("h2", null, groupName), /*#__PURE__*/_react.default.createElement(FieldGroup, {
-      fields: fieldGroups[groupName],
+    }, /*#__PURE__*/_react.default.createElement("h2", {
+      className: "field-group--title"
+    }, groupName), /*#__PURE__*/_react.default.createElement(FieldList, {
+      fields: _char.fieldGroups[groupName],
       char: char,
       onChangeField: onChangeField
     }));
   });
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "charater-sheet"
+  }, fieldGroupsEl);
 };
 
 var _default = CharacterSheet;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"scripts/components/CharacterSheetLoader.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../constants/char":"scripts/constants/char.js"}],"scripts/components/CharacterSheetLoader.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34286,9 +34373,7 @@ var CharacterSheetLoader = function CharacterSheetLoader(_ref) {
   };
 
   var handleSave = function handleSave() {
-    (0, _jsonboxClient.updateRecord)(charId, char).then(function (data) {
-      return setChar(data);
-    });
+    (0, _jsonboxClient.updateRecord)(charId, char);
   };
 
   return /*#__PURE__*/_react.default.createElement("div", null, char ? /*#__PURE__*/_react.default.createElement(_CharacterSheet.default, {
@@ -34463,7 +34548,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65419" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

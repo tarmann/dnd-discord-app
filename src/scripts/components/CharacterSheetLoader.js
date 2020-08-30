@@ -19,7 +19,6 @@ const CharacterSheetLoader = ({ charId }) => {
 
   const handleSave = () => {
     updateRecord(charId, char)
-      .then(data => setChar(data));
   }
 
   return (
