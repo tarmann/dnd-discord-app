@@ -58,7 +58,6 @@ const FieldGroup = ({ name, fields, char, onChangeField }) => (
 )
 
 const CharacterSheet = ({ char, onChangeField }) => {
-
   return (
     <div className="charater-sheet">
       <div class="charater-sheet--header">
@@ -71,17 +70,20 @@ const CharacterSheet = ({ char, onChangeField }) => {
         </Tab>
         
         <Tab eventKey="stats" title="Stats">
-        <FieldGroup name="hp" fields={fieldGroups["hp"]} char={char} onChangeField={onChangeField} />
+          <FieldGroup name="hp" fields={fieldGroups["hp"]} char={char} onChangeField={onChangeField} />
           <FieldGroup name="attributes" fields={fieldGroups["attributes"]} char={char} onChangeField={onChangeField} />
           <FieldGroup name="saves" fields={fieldGroups["saves"]} char={char} onChangeField={onChangeField} />
+        </Tab>
+
+        <Tab eventKey="skills" title="Skills">
           <FieldGroup name="explore" fields={fieldGroups["explore"]} char={char} onChangeField={onChangeField} />
         </Tab>
-        
-        <Tab eventKey="stuff" title="Stuff">
+
+        <Tab eventKey="stuff" title="Items">
           <FieldGroup name="carried" fields={fieldGroups["equipment"]} char={char} onChangeField={onChangeField} />
           <FieldGroup name="money" fields={fieldGroups["money"]} char={char} onChangeField={onChangeField} />
         </Tab>
-        
+
         <Tab eventKey="notes" title="Notes">
           <FieldGroup name="other" fields={fieldGroups["other"]} char={char} onChangeField={onChangeField} />
         </Tab>
