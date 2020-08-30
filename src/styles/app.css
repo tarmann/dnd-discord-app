@@ -52,3 +52,15 @@ body {
   border: solid 1px #ccc;
   padding: 20px
 }
+
+.actions {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  padding: 10px;
+  background: #ccc;
+}
+
+.actions button {
+  padding: 10px;
+}
