@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   BrowserRouter as Router,
+  HashRouter,
   Switch,
   Route,
   useRouteMatch,
@@ -40,9 +41,9 @@ const AppRoutes = () => {
 }
 
 const AppRouter = () => (
-  <Router basename={process.env.PUBLIC_URL}>
+  <HashRouter basename={process.env.PUBLIC_URL}>
     <AppRoutes />
-  </Router>
+  </HashRouter>
 )
 
 export default AppRouter;
