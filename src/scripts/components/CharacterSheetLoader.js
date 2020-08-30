@@ -27,7 +27,7 @@ const CharacterSheetLoader = ({ charId }) => {
         ? <CharacterSheet char={char} onChangeField={handleChangeField} />
         : 'loading'}
       
-      <div class="actions">
+      <div className="actions">
         <button onClick={handleSave}>Save</button>
       </div>
     </div>

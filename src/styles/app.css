@@ -21,7 +21,7 @@ body {
 }
 
 .field-group--title {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .input-group {
@@ -55,7 +55,7 @@ body {
 
 .actions {
   position: fixed;
-  top: 0px;
+  bottom: 0px;
   right: 0px;
   padding: 10px;
   background: #ccc;
@@ -63,4 +63,11 @@ body {
 
 .actions button {
   padding: 10px;
+}
+
+.charater-sheet--header {
+  background: black;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
 }
