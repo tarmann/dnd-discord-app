@@ -40,7 +40,7 @@ const AppRoutes = () => {
 }
 
 const AppRouter = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <AppRoutes />
   </Router>
 )
