@@ -41,7 +41,7 @@ const AppRoutes = () => {
 }
 
 const AppRouter = () => (
-  <HashRouter basename={process.env.PUBLIC_URL}>
+  <HashRouter basename='/'>
     <AppRoutes />
   </HashRouter>
 )
