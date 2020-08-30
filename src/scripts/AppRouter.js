@@ -33,7 +33,7 @@ const AppRoutes = () => {
       </Route>
       
       <Route path={match.path}>
-        <div>Nothing here...</div>
+        <CharListLoader />
       </Route>
     </Switch>
   )
