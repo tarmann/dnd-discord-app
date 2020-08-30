@@ -22,3 +22,10 @@ export const updateRecord = (recordId, data) => {
   const url = `${BASE_URL}/${URL_ID}/${recordId}`;
   return axios.put(url, data);
 }
+
+export const deleteRecord = (recordId) => {
+  if(!recordId) return;
+  
+  const url = `${BASE_URL}/${URL_ID}/${recordId}`;
+  return axios.delete(url);
+}

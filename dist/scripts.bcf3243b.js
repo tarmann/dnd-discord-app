@@ -34052,7 +34052,7 @@ module.exports = require('./lib/axios');
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateRecord = exports.getCollection = exports.getAllRecords = exports.getRecord = void 0;
+exports.deleteRecord = exports.updateRecord = exports.getCollection = exports.getAllRecords = exports.getRecord = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -34088,6 +34088,14 @@ var updateRecord = function updateRecord(recordId, data) {
 };
 
 exports.updateRecord = updateRecord;
+
+var deleteRecord = function deleteRecord(recordId) {
+  if (!recordId) return;
+  var url = "".concat(BASE_URL, "/").concat(URL_ID, "/").concat(recordId);
+  return _axios.default.delete(url);
+};
+
+exports.deleteRecord = deleteRecord;
 },{"axios":"../node_modules/axios/index.js"}],"scripts/components/CharacterSheet.js":[function(require,module,exports) {
 "use strict";
 
@@ -34325,11 +34333,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CharList = function CharList(_ref) {
   var _ref$chars = _ref.chars,
-      chars = _ref$chars === void 0 ? [] : _ref$chars;
+      chars = _ref$chars === void 0 ? [] : _ref$chars,
+      _ref$onDelete = _ref.onDelete,
+      onDelete = _ref$onDelete === void 0 ? function () {} : _ref$onDelete;
   return chars.map(function (char) {
     return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "char/".concat(char._id)
-    }, char.name, " (", char.className, " ", char.level, ")"));
+    }, char._collection, ": ", char.name, " (", char.className, " ", char.level, ")"), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return onDelete(char._id);
+      }
+    }, " x "));
   });
 };
 
@@ -34339,13 +34353,25 @@ var CharacterSheetLoader = function CharacterSheetLoader() {
       chars = _useState2[0],
       setChars = _useState2[1];
 
-  (0, _react.useEffect)(function () {
+  var fetchRecords = function fetchRecords() {
     (0, _jsonboxClient.getAllRecords)().then(function (result) {
       return setChars(result.data);
     });
-  });
+  };
+
+  (0, _react.useEffect)(function () {
+    fetchRecords();
+  }, []);
+
+  var handleDelete = function handleDelete(recordId) {
+    (0, _jsonboxClient.deleteRecord)(recordId).then(function () {
+      return fetchRecords();
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement("div", null, chars && chars.length ? /*#__PURE__*/_react.default.createElement(CharList, {
-    chars: chars
+    chars: chars,
+    onDelete: handleDelete
   }) : 'loading');
 };
 
@@ -34437,7 +34463,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59264" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63436" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
