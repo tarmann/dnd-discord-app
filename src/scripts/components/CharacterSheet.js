@@ -1,9 +1,16 @@
 import React from "react";
 
-import { fieldGroups } from '../constants/char';
+import { fieldGroups, isThief, isCleric } from '../constants/char';
 
+import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar'
+
+import Form from 'react-bootstrap/Form'
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const Field = ({ locked = false, type, ...otherProps }) => {
   const fieldProps = {
@@ -30,24 +37,39 @@ const FieldList = ({
     const isExpanded = fields[attr].expanded ? "is-expanded" : ""; 
     const classNames = `input-group ${isExpanded}`;
 
+    const as = fields[attr].type === "textarea" ? "textarea" : "input";
+
     return (
-      <div className={classNames} key={i}>
-        <label className="input-label">{fields[attr].label || attr}</label>
+      // <div className={classNames} key={i}>
+      //   <label className="input-label">{fields[attr].label || attr}</label>
         
-        <Field
-          locked={fields[attr].locked}
-          type={fields[attr].type}
-          defaultValue={char[attr]}
-          onChange={e => onChangeField(attr, e.target.value)}
-        />
-      </div>
+      //   <Field
+      //     locked={fields[attr].locked}
+      //     type={fields[attr].type}
+      //     defaultValue={char[attr]}
+      //     onChange={e => onChangeField(attr, e.target.value)}
+      //   />
+      // </div>
+      <Form.Group as={Row} controlId="formHorizontalEmail">
+        <Form.Label column sm={2}>
+          {fields[attr].label || attr}
+        </Form.Label>
+        
+        <Col sm={10}>
+          <Form.Control
+            as={as}
+            value={char[attr]}
+            onChange={e => onChangeField(attr, e.target.value)}
+          />
+        </Col>
+      </Form.Group>
     )
   })
 }
 
 const FieldGroup = ({ name, fields, char, onChangeField }) => (
   <div className="field-group">
-    <h2 className="field-group--title">{name}</h2>
+    <h4 className="field-group--title">{name}</h4>
     
     <FieldList
       fields={fields}
@@ -58,47 +80,51 @@ const FieldGroup = ({ name, fields, char, onChangeField }) => (
 )
 
 const CharacterSheet = ({ char, onChangeField }) => {
-  const props = {
+  const fieldGroupProps = {
     char,
     onChangeField
   }
 
   return (
-    <div className="charater-sheet">
-      <div class="charater-sheet--header">
-        {char.name} - {char.className} {char.level}
-      </div>
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">{char.name} ({char.className} {char.level})</Navbar.Brand>
+      </Navbar>
 
-      <Tabs variant="pills">
-        <Tab eventKey="char" title="Char">
-          <FieldGroup name="Character Info" fields={fieldGroups["basic"]} {...props} />
-        </Tab>
-        
-        <Tab eventKey="stats" title="Stats">
-          <FieldGroup name="Base" fields={fieldGroups["hp"]} {...props} />
-          <FieldGroup name="Attributes" fields={fieldGroups["attributes"]} {...props} />
-          <FieldGroup name="Saving Throws" fields={fieldGroups["saves"]} {...props} />
-        </Tab>
+      <Container className="charater-sheet">
+        <Tabs variant="pills">
+          <Tab eventKey="char" title="Char">
+            <FieldGroup name="Character Info" fields={fieldGroups["basic"]} {...fieldGroupProps} />
+          </Tab>
+          
+          <Tab eventKey="stats" title="Stats">
+            <FieldGroup name="Base" fields={fieldGroups["hp"]} {...fieldGroupProps} />
+            <FieldGroup name="Attributes" fields={fieldGroups["attributes"]} {...fieldGroupProps} />
+            <FieldGroup name="Saving Throws" fields={fieldGroups["saves"]} {...fieldGroupProps} />
+          </Tab>
 
-        <Tab eventKey="skills" title="Skills">
-          <FieldGroup name="Basic Skills" fields={fieldGroups["skills"]} {...props} />
-          <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...props} />
-        </Tab>
+          <Tab eventKey="skills" title="Skills">
+            <FieldGroup name="Basic Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
+            {isThief(char) &&
+              <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...fieldGroupProps} />}
+          </Tab>
 
-        <Tab eventKey="spells" title="Spells">
-          <FieldGroup name="Spells" fields={fieldGroups["spells"]} {...props} />
-          <FieldGroup name="Turn Undead" fields={fieldGroups["turnUndead"]} {...props} />
-        </Tab>
+          <Tab eventKey="spells" title="Spells">
+            <FieldGroup name="Spells" fields={fieldGroups["spells"]} {...fieldGroupProps} />
+            {isCleric(char) &&
+              <FieldGroup name="Turn Undead" fields={fieldGroups["turnUndead"]} {...fieldGroupProps} />}
+          </Tab>
 
-        <Tab eventKey="items" title="Items">
-          <FieldGroup name="Items carried" fields={fieldGroups["equipment"]} {...props} />
-          <FieldGroup name="Money" fields={fieldGroups["money"]} {...props} />
-        </Tab>
+          <Tab eventKey="items" title="Items">
+            <FieldGroup name="Items carried" fields={fieldGroups["equipment"]} {...fieldGroupProps} />
+            <FieldGroup name="Money" fields={fieldGroups["money"]} {...fieldGroupProps} />
+          </Tab>
 
-        <Tab eventKey="notes" title="Notes">
-          <FieldGroup name="other" fields={fieldGroups["other"]} {...props} />
-        </Tab>
-      </Tabs>
+          <Tab eventKey="notes" title="Notes">
+            <FieldGroup name="other" fields={fieldGroups["other"]} {...fieldGroupProps} />
+          </Tab>
+        </Tabs>
+      </Container>
     </div>
   )
 }

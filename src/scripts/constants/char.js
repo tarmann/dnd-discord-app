@@ -1,27 +1,41 @@
+export const classes = {
+  CLERIC: 'Cleric',
+  FIGHTER: 'Fighter',
+  THIEF: 'Thief',
+  MAGIC_USER: 'Magic-User',
+  DWARF: 'Dwarf',
+  ELF: 'ELF',
+  HALFLING: 'ELF'
+}
+
+export const isThief = char => char.className === classes.THIEF;
+
+export const isCleric = char => char.className === classes.CLERIC;
+
 export const fieldGroups = {
   "basic": {
-    "player": { type: "number" },
-    "name": { type: "number" },
-    "alignment": { type: "text" },
-    "className": { type: "number" },
-    "level": { type: "number", locked: true },
-    "xp": { type: "number" }
+    "player":    { label: "Player", type: "number" },
+    "name":      { label: "Name", type: "number" },
+    "alignment": { label: "Alignment",  type: "text" },
+    "className": { label: "Class", type: "number" },
+    "level":     { label: "Level", type: "number", locked: true },
+    "xp":        { label: "XP", type: "number" }
   },
   
   "hp": {
-    "ac": { type: "number", locked: false },
-    "thac0": { type: "number", locked: true },
-    "hp": { type: "number" },
-    "hpMax": { type: "number", locked: true },  
+    "ac":        { type: "number", locked: false },
+    "thac0":     { type: "number", locked: true },
+    "hp":        { type: "number" },
+    "hpMax":     { type: "number", locked: true },  
   },
 
   "attributes": {
-    "str": { type: "number", locked: true },
-    "int": { type: "number", locked: true },
-    "wis": { type: "number", locked: true },
-    "dex": { type: "number", locked: true },
-    "con": { type: "number", locked: true },
-    "cha": { type: "number", locked: true }
+    "str":      { type: "number", locked: true },
+    "int":      { type: "number", locked: true },
+    "wis":      { type: "number", locked: true },
+    "dex":      { type: "number", locked: true },
+    "con":      { type: "number", locked: true },
+    "cha":      { type: "number", locked: true }
   },
 
   "saves": {
@@ -33,20 +47,20 @@ export const fieldGroups = {
   },
 
   "skills": {
-    "search":   { type: "number", locked: true },
-    "openDoor": { type: "number", locked: true },
-    "listen":   { type: "number", locked: true }
+    "search":   { label: "Search", type: "number", locked: true },
+    "openDoor": { label: "Open door", type: "number", locked: true },
+    "listen":   { label: "Listen", type: "number", locked: true }
   },
 
   "thiefSkills": {
-    "openLock": { type: "number" },
-    "findTraps": { type: "number" },
-    "removeTrap": { type: "number" },
-    "climbWalls": { type: "number" },
-    "moveSilently": { type: "number" },
-    "hideInShadows": { type: "number" },
-    "pickPocket": { type: "number" },
-    "hearNoise": { type: "number" }
+    "openLock":       { type: "number" },
+    "findTraps":      { type: "number" },
+    "removeTrap":     { type: "number" },
+    "climbWalls":     { type: "number" },
+    "moveSilently":   { type: "number" },
+    "hideInShadows":  { type: "number" },
+    "pickPocket":     { type: "number" },
+    "hearNoise":      { type: "number" }
   },
 
   "spells": {
@@ -54,29 +68,29 @@ export const fieldGroups = {
   },
 
   "turnUndead": {
-    "skeletons": { label: "Skeletons", type: "number" },
-    "zombies": { label: "Zombies", type: "number" },
-    "ghouls": { label: "Ghouls", type: "number" },
-    "wights": { label: "Wights", type: "number" },
-    "wraiths": { label: "Wights", type: "number" }
+    "skeletons":  { label: "Skeletons", type: "number" },
+    "zombies":    { label: "Zombies", type: "number" },
+    "ghouls":     { label: "Ghouls", type: "number" },
+    "wights":     { label: "Wights", type: "number" },
+    "wraiths":    { label: "Wights", type: "number" }
   },
 
   "money": {
-    "platinum": "",
-    "gold": "",
-    "electrum": "",
-    "silver": "",
-    "copper": ""
+    "platinum": { label: "Platinum (PP)" },
+    "gold": { label: "Gold (GP)" },
+    "electrum": { label: "Electrum (EP)" },
+    "silver": { label: "Silver (SP)" },
+    "copper": { label: "Copper (CP)" }
   },
 
   "equipment": {
     "carried":  {
-      label: "Equipment carried",
+      label: "Carried",
       type: "textarea",
       expanded: true
     },
     "stash": {
-      label: "Equipment stashed",
+      label: "Stashed",
       type: "textarea",
       expanded: true
     }
