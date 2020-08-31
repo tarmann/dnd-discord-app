@@ -58,6 +58,11 @@ const FieldGroup = ({ name, fields, char, onChangeField }) => (
 )
 
 const CharacterSheet = ({ char, onChangeField }) => {
+  const props = {
+    char,
+    onChangeField
+  }
+
   return (
     <div className="charater-sheet">
       <div class="charater-sheet--header">
@@ -66,26 +71,32 @@ const CharacterSheet = ({ char, onChangeField }) => {
 
       <Tabs variant="pills">
         <Tab eventKey="char" title="Char">
-          <FieldGroup name="basic" fields={fieldGroups["basic"]} char={char} onChangeField={onChangeField} />
+          <FieldGroup name="Character Info" fields={fieldGroups["basic"]} {...props} />
         </Tab>
         
         <Tab eventKey="stats" title="Stats">
-          <FieldGroup name="hp" fields={fieldGroups["hp"]} char={char} onChangeField={onChangeField} />
-          <FieldGroup name="attributes" fields={fieldGroups["attributes"]} char={char} onChangeField={onChangeField} />
-          <FieldGroup name="saves" fields={fieldGroups["saves"]} char={char} onChangeField={onChangeField} />
+          <FieldGroup name="Base" fields={fieldGroups["hp"]} {...props} />
+          <FieldGroup name="Attributes" fields={fieldGroups["attributes"]} {...props} />
+          <FieldGroup name="Saving Throws" fields={fieldGroups["saves"]} {...props} />
         </Tab>
 
         <Tab eventKey="skills" title="Skills">
-          <FieldGroup name="explore" fields={fieldGroups["explore"]} char={char} onChangeField={onChangeField} />
+          <FieldGroup name="Basic Skills" fields={fieldGroups["skills"]} {...props} />
+          <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...props} />
         </Tab>
 
-        <Tab eventKey="stuff" title="Items">
-          <FieldGroup name="carried" fields={fieldGroups["equipment"]} char={char} onChangeField={onChangeField} />
-          <FieldGroup name="money" fields={fieldGroups["money"]} char={char} onChangeField={onChangeField} />
+        <Tab eventKey="spells" title="Spells">
+          <FieldGroup name="Spells" fields={fieldGroups["spells"]} {...props} />
+          <FieldGroup name="Turn Undead" fields={fieldGroups["turnUndead"]} {...props} />
+        </Tab>
+
+        <Tab eventKey="items" title="Items">
+          <FieldGroup name="Items carried" fields={fieldGroups["equipment"]} {...props} />
+          <FieldGroup name="Money" fields={fieldGroups["money"]} {...props} />
         </Tab>
 
         <Tab eventKey="notes" title="Notes">
-          <FieldGroup name="other" fields={fieldGroups["other"]} char={char} onChangeField={onChangeField} />
+          <FieldGroup name="other" fields={fieldGroups["other"]} {...props} />
         </Tab>
       </Tabs>
     </div>
