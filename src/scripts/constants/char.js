@@ -14,8 +14,9 @@ export const isCleric = char => char.className === classes.CLERIC;
 
 export const fieldGroups = {
   "basic": {
-    "player":    { label: "Player", type: "number" },
-    "name":      { label: "Name", type: "number" },
+    "image":     { label: "Image URL:", type: "text" },
+    "player":    { label: "Player", type: "text" },
+    "name":      { label: "Name", type: "text" },
     "alignment": { label: "Alignment",  type: "text" },
     "className": { label: "Class", type: "number" },
     "level":     { label: "Level", type: "number", locked: true },
@@ -23,10 +24,10 @@ export const fieldGroups = {
   },
   
   "hp": {
-    "ac":        { type: "number", locked: false },
-    "thac0":     { type: "number", locked: true },
-    "hp":        { type: "number" },
-    "hpMax":     { type: "number", locked: true },  
+    "ac":        { label: "AC", type: "number", locked: false },
+    "thac0":     { label: "THAC0", type: "number", locked: true },
+    "hp":        { label: "HP", type: "number" },
+    "hpMax":     { label: "HP (Max)", type: "number", locked: true },  
   },
 
   "attributes": {
@@ -99,6 +100,11 @@ export const fieldGroups = {
   "other": {
     "notes": {
       label: "Other notes",
+      type: "textarea",
+      expanded: true
+    },
+    "XP": {
+      label: "XP",
       type: "textarea",
       expanded: true
     }

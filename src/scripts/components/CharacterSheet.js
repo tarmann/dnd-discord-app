@@ -12,52 +12,23 @@ import Tab from 'react-bootstrap/Tab';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const Field = ({ locked = false, type, ...otherProps }) => {
-  const fieldProps = {
-    ...otherProps,
-    className: "input-field",
-    // disabled: locked
-  }
-
-  switch(type){
-    case "textarea":
-      return <textarea {...fieldProps} />;
-    
-      default: 
-      return <input {...fieldProps} />;
-  }
-}
-
 const FieldList = ({
   fields, 
   char,
   onChangeField = () => {}
 }) => {
   return Object.keys(fields).map((attr, i) => {
-    const isExpanded = fields[attr].expanded ? "is-expanded" : ""; 
-    const classNames = `input-group ${isExpanded}`;
-
-    const as = fields[attr].type === "textarea" ? "textarea" : "input";
+    const fieldType = fields[attr].type === "textarea" ? "textarea" : "input";
 
     return (
-      // <div className={classNames} key={i}>
-      //   <label className="input-label">{fields[attr].label || attr}</label>
-        
-      //   <Field
-      //     locked={fields[attr].locked}
-      //     type={fields[attr].type}
-      //     defaultValue={char[attr]}
-      //     onChange={e => onChangeField(attr, e.target.value)}
-      //   />
-      // </div>
       <Form.Group as={Row} controlId="formHorizontalEmail">
-        <Form.Label column sm={2}>
+        <Form.Label column sm={3}>
           {fields[attr].label || attr}
         </Form.Label>
         
-        <Col sm={10}>
+        <Col sm={9}>
           <Form.Control
-            as={as}
+            as={fieldType}
             value={char[attr]}
             onChange={e => onChangeField(attr, e.target.value)}
           />
@@ -120,8 +91,8 @@ const CharacterSheet = ({ char, onChangeField }) => {
             <FieldGroup name="Money" fields={fieldGroups["money"]} {...fieldGroupProps} />
           </Tab>
 
-          <Tab eventKey="notes" title="Notes">
-            <FieldGroup name="other" fields={fieldGroups["other"]} {...fieldGroupProps} />
+          <Tab eventKey="journal" title="Journal">
+            <FieldGroup name="Notes" fields={fieldGroups["other"]} {...fieldGroupProps} />
           </Tab>
         </Tabs>
       </Container>
