@@ -18,11 +18,14 @@ const CharacterSheetLoader = () => {
   const [chars, setChars] = useState([]);
 
   const fetchRecords = () => {
-    getAllRecords().then(result => setChars(result.data))
+    getAllRecords().then(result => {
+      const chars = result.data.filter(i => i.type !== "preferences");
+      setChars(chars);
+    });
   }
 
   useEffect(() => {
-    fetchRecords()
+    fetchRecords();
   }, [])
 
   const handleDelete = (recordId) => {
