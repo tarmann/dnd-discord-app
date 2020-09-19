@@ -19,6 +19,7 @@ const FieldList = ({
 }) => {
   return Object.keys(fields).map((attr, i) => {
     const fieldType = fields[attr].type === "textarea" ? "textarea" : "input";
+    const rows = fields[attr].type === "textarea" ? 10 : null;
 
     return (
       <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -29,6 +30,7 @@ const FieldList = ({
         <Col sm={9}>
           <Form.Control
             as={fieldType}
+            rows={rows}
             value={char[attr]}
             onChange={e => onChangeField(attr, e.target.value)}
           />
@@ -50,7 +52,7 @@ const FieldGroup = ({ name, fields, char, onChangeField }) => (
   </div>
 )
 
-const CharacterSheet = ({ char, onChangeField }) => {
+const CharacterSheet = ({ char, onChangeField, onSave }) => {
   const fieldGroupProps = {
     char,
     onChangeField
@@ -76,6 +78,7 @@ const CharacterSheet = ({ char, onChangeField }) => {
 
           <Tab eventKey="skills" title="Skills">
             <FieldGroup name="Basic Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
+            
             {isThief(char) &&
               <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...fieldGroupProps} />}
           </Tab>
@@ -95,6 +98,10 @@ const CharacterSheet = ({ char, onChangeField }) => {
             <FieldGroup name="Notes" fields={fieldGroups["other"]} {...fieldGroupProps} />
           </Tab>
         </Tabs>
+
+        <div className="actions">
+          <button onClick={onSave}>Save</button>
+        </div>
       </Container>
     </div>
   )
