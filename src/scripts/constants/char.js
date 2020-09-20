@@ -14,17 +14,19 @@ export const isCleric = char => char.className === classes.CLERIC;
 
 export const fieldGroups = {
   "basic": {
-    "image":     { label: "Image URL:", type: "text" },
-    "player":    { label: "Player", type: "text" },
-    "name":      { label: "Name", type: "text" },
-    "alignment": { label: "Alignment",  type: "text" },
-    "className": { label: "Class", type: "number" },
-    "level":     { label: "Level", type: "number", locked: true },
-    "xp":        { label: "XP", type: "number" }
+    "image":       { label: "Image URL:", type: "text" },
+    "player":      { label: "Player", type: "text" },
+    "name":        { label: "Name", type: "text" },
+    "alignment":   { label: "Alignment",  type: "text" },
+    "className":   { label: "Class", type: "number" },
+    "level":       { label: "Level", type: "number", locked: true },
+    "xp":          { label: "XP", type: "number" },
+    "nextLevelXP": { label: "Next Level XP", type: "number" }
   },
   
   "hp": {
     "ac":        { label: "AC", type: "number", locked: false },
+    "armour":    { label: "Armour", type: "text", locked: false },
     "thac0":     { label: "THAC0", type: "number", locked: true },
     "hp":        { label: "HP", type: "number" },
     "hpMax":     { label: "HP (Max)", type: "number", locked: true },  
