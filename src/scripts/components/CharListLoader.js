@@ -23,7 +23,7 @@ const CharacterSheetLoader = () => {
   }
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       {chars && chars.length
         ? <CharList chars={chars} onDelete={handleDelete} />
         : 'loading'}

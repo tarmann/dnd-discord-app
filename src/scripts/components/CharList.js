@@ -6,8 +6,9 @@ const CharList = ({ chars = [], onDelete = () => {} }) => {
   return chars.map(char => (
     <div>
       <Link to={`char/${char._id}`}>
-        {char._collection}: {char.name} ({char.className} {char.level})
+        {char.name} ({char.className} {char.level})
       </Link>
+      
       <button onClick={() => onDelete(char._id)}> x </button>
     </div>
   ))
