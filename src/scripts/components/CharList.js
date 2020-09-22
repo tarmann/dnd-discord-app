@@ -21,7 +21,7 @@ const CharListGroups = ({
   const charGroups = groupBy(chars, '_collection');
 
   return Object.keys(charGroups).map(groupId => (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h3>{groupId}</h3>
       <CharList chars={charGroups[groupId]} onDelete={onDelete} />
     </div>
