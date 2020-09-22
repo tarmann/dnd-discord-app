@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { getAllRecords, deleteRecord } from '../clients/jsonboxClient';
 
-const CharList = ({ chars = [], onDelete = () => {} }) => {
-  return chars.map(char => (
-    <div>
-      <Link to={`char/${char._id}`}>
-        {char._collection}: {char.name} ({char.className} {char.level})
-      </Link>
-      <button onClick={() => onDelete(char._id)}> x </button>
-    </div>
-  ))
-}
+import CharList from './CharList';
 
 const CharacterSheetLoader = () => {
   const [chars, setChars] = useState([]);

@@ -9,12 +9,12 @@ export const getRecord = (recordId) => {
 }
 
 export const getAllRecords = () => {
-  const url = `${BASE_URL}/${URL_ID}`;
+  const url = `${BASE_URL}/${URL_ID}?limit=1000`;
   return axios.get(url)
 }
 
 export const getCollection = (collectionId) => {
-  const url = `${BASE_URL}/${URL_ID}/collectionId`;
+  const url = `${BASE_URL}/${URL_ID}/collectionId?limit=1000`;
   return axios.get(url)
 }
 
