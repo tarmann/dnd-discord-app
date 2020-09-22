@@ -66,7 +66,7 @@ const CharacterSheet = ({ char, onChangeField, onSave }) => {
 
       <Container className="charater-sheet">
         <Tabs variant="pills">
-          <Tab eventKey="char" title="Char">
+          <Tab eventKey="char" title="Base">
             <FieldGroup name="Character Info" fields={fieldGroups["basic"]} {...fieldGroupProps} />
           </Tab>
           
@@ -77,19 +77,21 @@ const CharacterSheet = ({ char, onChangeField, onSave }) => {
           </Tab>
 
           <Tab eventKey="skills" title="Skills">
-            <FieldGroup name="Basic Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
+            <FieldGroup name="Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
+            <FieldGroup name="Abilities" fields={fieldGroups["abilities"]} {...fieldGroupProps} />
             
             {isThief(char) &&
               <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...fieldGroupProps} />}
           </Tab>
 
-          <Tab eventKey="spells" title="Spells">
+          <Tab eventKey="magic" title="Magic">
             <FieldGroup name="Spells" fields={fieldGroups["spells"]} {...fieldGroupProps} />
+            
             {isCleric(char) &&
               <FieldGroup name="Turn Undead" fields={fieldGroups["turnUndead"]} {...fieldGroupProps} />}
           </Tab>
 
-          <Tab eventKey="items" title="Items">
+          <Tab eventKey="inventory" title="Inventory">
             <FieldGroup name="Items carried" fields={fieldGroups["equipment"]} {...fieldGroupProps} />
             <FieldGroup name="Money" fields={fieldGroups["money"]} {...fieldGroupProps} />
           </Tab>

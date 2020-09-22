@@ -49,6 +49,10 @@ export const fieldGroups = {
     "magic": { type: "number", locked: true },
   },
 
+  "abilities": {
+    "abilities":   { label: "Abilities", type: "textarea", locked: true },
+  },
+
   "skills": {
     "search":   { label: "Search", type: "number", locked: true },
     "openDoor": { label: "Open door", type: "number", locked: true },
@@ -87,28 +91,13 @@ export const fieldGroups = {
   },
 
   "equipment": {
-    "carried":  {
-      label: "Carried",
-      type: "textarea",
-      expanded: true
-    },
-    "stash": {
-      label: "Stashed",
-      type: "textarea",
-      expanded: true
-    }
+    "weapons":  { label: "Weapons", type: "textarea", expanded: true },
+    "carried":  { label: "Carried", type: "textarea", expanded: true },
+    "stash": { label: "Stashed", type: "textarea", expanded: true }
   },
 
   "other": {
-    "notes": {
-      label: "Other notes",
-      type: "textarea",
-      expanded: true
-    },
-    "XP": {
-      label: "XP",
-      type: "textarea",
-      expanded: true
-    }
+    "notes": { label: "Other notes", type: "textarea", expanded: true },
+    "XP": { label: "XP", type: "textarea", expanded: true }
   }  
 }
