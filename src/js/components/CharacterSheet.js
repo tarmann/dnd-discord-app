@@ -77,8 +77,8 @@ const CharacterSheet = ({ char, onChangeField, onSave }) => {
           </Tab>
 
           <Tab eventKey="skills" title="Skills">
-            <FieldGroup name="Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
             <FieldGroup name="Abilities" fields={fieldGroups["abilities"]} {...fieldGroupProps} />
+            <FieldGroup name="Skills" fields={fieldGroups["skills"]} {...fieldGroupProps} />
             
             {isThief(char) &&
               <FieldGroup name="Thief Skills" fields={fieldGroups["thiefSkills"]} {...fieldGroupProps} />}
