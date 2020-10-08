@@ -98,6 +98,7 @@ export const fieldGroups = {
 
   "other": {
     "notes": { label: "Other notes", type: "textarea", expanded: true },
-    "XP": { label: "XP", type: "textarea", expanded: true }
+    "XP": { label: "XP", type: "textarea", expanded: true },
+    "macros": { label: "Macros", type: "textarea", expanded: true },
   }  
 }
