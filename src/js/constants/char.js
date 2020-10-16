@@ -70,6 +70,19 @@ export const fieldGroups = {
     "hearNoise":      { type: "number" }
   },
 
+  "thiefSkills2": { 
+    "architecture":  { type: "number" },
+    "bushcraft":     { type: "number" },
+    "climb":         { type: "number" },
+    "­languages":     { type: "number" },
+    "openDoors":     { type: "number" },
+    "search":        { type: "number" },
+    "sleightOfHand": { type: "number" },
+    "stealth":       { type: "number" },
+    "sneakAttack":   { type: "number" },
+    "tinker":        { type: "number" },
+  },
+
   "spells": {
     "spells": { label: "Spells", type: "textarea", expanded: true }
   },
