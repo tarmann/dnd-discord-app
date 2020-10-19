@@ -3,29 +3,55 @@ import { groupBy } from 'lodash';
 import { Link } from "react-router-dom";
 
 const CharList = ({ chars = [], onDelete = () => {} }) => {
-  return chars.map(char => (
-    <div>
-      <Link to={`char/${char._id}`}>
-        {char.name} ({char.className} {char.level})
-      </Link>
-      
-      <button onClick={() => onDelete(char._id)}> x </button>
-    </div>
+  const rows = chars.map(char => (
+    <tr>
+      <td>
+        {char.player}
+      </td>
+      <td>
+        <Link to={`char/${char._id}`}>
+          {char.name}
+        </Link> <br />
+        <small>{char.className} {char.level}</small>
+      </td>
+      <td>
+        {char.ac}
+      </td>      
+      <td>
+        {char.hp} / {char.hpMax}
+      </td>      
+      <td>
+        <button onClick={() => onDelete(char._id)}> x </button>
+      </td>
+    </tr>
   ))
+
+  return (
+    <table border="1" width="600px">
+      <tr>
+        <th>Player</th>
+        <th>Name</th>
+        <th>AC</th>
+        <th>HP</th>
+        <th>Actions</th>
+      </tr>
+      {rows}
+    </table>
+  )
 }
 
 const CharListGroups = ({
   chars = [],
   onDelete = {}
 }) => {
-  const charGroups = groupBy(chars, '_collection');
+  const charGroups = groupBy(chars, 'campaign');
 
-  return Object.keys(charGroups).map(groupId => (
+  return Object.keys(charGroups).map(id => (
     <div style={{ padding: "20px" }}>
-      <h3>{groupId}</h3>
-      <CharList chars={charGroups[groupId]} onDelete={onDelete} />
+      <h3>{id}</h3>
+      <CharList chars={charGroups[id]} onDelete={onDelete} />
     </div>
-  ))
+  ));
 }
 
 export default CharListGroups;

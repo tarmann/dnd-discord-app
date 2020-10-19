@@ -16,6 +16,7 @@ export const fieldGroups = {
   "basic": {
     "image":       { label: "Image URL:", type: "text" },
     "player":      { label: "Player", type: "text" },
+    "campaign":    { label: "Campaign", type: "text" },
     "name":        { label: "Name", type: "text" },
     "alignment":   { label: "Alignment",  type: "text" },
     "className":   { label: "Class", type: "number" },
