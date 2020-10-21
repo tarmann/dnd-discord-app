@@ -11,8 +11,7 @@ const CharList = ({ chars = [], onDelete = () => {} }) => {
       <td>
         <Link to={`char/${char._id}`}>
           {char.name}
-        </Link> <br />
-        <small>{char.className} {char.level}</small>
+        </Link> <small>{char.className} {char.level}</small>
       </td>
       <td>
         {char.ac}
@@ -29,11 +28,11 @@ const CharList = ({ chars = [], onDelete = () => {} }) => {
   return (
     <table border="1" width="600px">
       <tr>
-        <th>Player</th>
+        <th style={{width: '100px'}}>Player</th>
         <th>Name</th>
-        <th>AC</th>
-        <th>HP</th>
-        <th>Actions</th>
+        <th style={{width: '70px'}}>AC</th>
+        <th style={{width: '70px'}}>HP</th>
+        <th style={{width: '70px'}}>Actions</th>
       </tr>
       {rows}
     </table>

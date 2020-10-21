@@ -29,6 +29,7 @@ export const fieldGroups = {
     "ac":        { label: "AC", type: "number", locked: false },
     "armour":    { label: "Armour", type: "text", locked: false },
     "thac0":     { label: "THAC0", type: "number", locked: true },
+    "ab":        { label: "Attack Bonus", type: "number", locked: true },
     "hp":        { label: "HP", type: "number" },
     "hpMax":     { label: "HP (Max)", type: "number", locked: true },  
   },
