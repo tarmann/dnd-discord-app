@@ -76,7 +76,7 @@ export const fieldGroups = {
     "architecture":  { type: "number" },
     "bushcraft":     { type: "number" },
     "climb":         { type: "number" },
-    "­languages":     { type: "number" },
+    "languages":     { type: "number" },
     "openDoors":     { type: "number" },
     "search":        { type: "number" },
     "sleightOfHand": { type: "number" },
