@@ -35,12 +35,12 @@ export const fieldGroups = {
   },
 
   "attributes": {
-    "str":      { type: "number", locked: true },
-    "int":      { type: "number", locked: true },
-    "wis":      { type: "number", locked: true },
-    "dex":      { type: "number", locked: true },
-    "con":      { type: "number", locked: true },
-    "cha":      { type: "number", locked: true }
+    "str":      { label: "Strength", type: "number", locked: true },
+    "int":      { label: "Intelligence", type: "number", locked: true },
+    "wis":      { label: "Wisdom", type: "number", locked: true },
+    "dex":      { label: "Dexterity", type: "number", locked: true },
+    "con":      { label: "Constitution", type: "number", locked: true },
+    "cha":      { label: "Charisma", type: "number", locked: true }
   },
 
   "saves": {
@@ -56,34 +56,28 @@ export const fieldGroups = {
   },
 
   "skills": {
+    "surprise":   { label: "Surprise", type: "number", locked: true },
     "search":   { label: "Search", type: "number", locked: true },
-    "openDoor": { label: "Open door", type: "number", locked: true },
+    "openDoors": { label: "Open door", type: "number", locked: true },
     "listen":   { label: "Listen", type: "number", locked: true }
   },
 
-  "thiefSkills": {
-    "openLock":       { type: "number" },
-    "findTraps":      { type: "number" },
-    "removeTrap":     { type: "number" },
-    "climbWalls":     { type: "number" },
-    "moveSilently":   { type: "number" },
-    "hideInShadows":  { type: "number" },
-    "pickPocket":     { type: "number" },
-    "hearNoise":      { type: "number" }
-  },
-
-  "thiefSkills2": { 
+  "thiefSkills": { 
     "architecture":  { type: "number" },
     "bushcraft":     { type: "number" },
     "climb":         { type: "number" },
     "languages":     { type: "number" },
     "openDoors":     { type: "number" },
     "search":        { type: "number" },
-    "sleightOfHand": { type: "number" },
+    "sleightOfHand": { label: "Sleight of Hand", type: "number" },
     "stealth":       { type: "number" },
     "sneakAttack":   { type: "number" },
     "tinker":        { type: "number" },
   },
+
+  "ragerSkills": { 
+    "tracking":  { type: "number" },
+  },  
 
   "spells": {
     "spells": { label: "Spells", type: "textarea", expanded: true }

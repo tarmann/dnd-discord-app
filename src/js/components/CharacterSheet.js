@@ -24,7 +24,8 @@ const FieldList = ({
     return (
       <Form.Group as={Row} controlId="formHorizontalEmail">
         <Form.Label column sm={3}>
-          {fields[attr].label || attr}
+          <strong className="attr-label">{fields[attr].label}</strong>
+          <span className="attr-name">{attr}</span>
         </Form.Label>
         
         <Col sm={9}>
@@ -78,7 +79,7 @@ const CharacterSheet = ({ char, onChangeField, onSave }) => {
 
           <Tab eventKey="skills" title="Skills">
             <FieldGroup name="Abilities" fields={fieldGroups["abilities"]} {...fieldGroupProps} />
-            <FieldGroup name="Skills" fields={fieldGroups["thiefSkills2"]} {...fieldGroupProps} />
+            <FieldGroup name="Skills" fields={fieldGroups["thiefSkills"]} {...fieldGroupProps} />
           </Tab>
 
           <Tab eventKey="magic" title="Magic">
