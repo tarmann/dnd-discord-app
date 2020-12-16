@@ -12,6 +12,9 @@ import {
 import CharacterSheetLoader from './components/CharacterSheetLoader';
 import CharListLoader from './components/CharListLoader';
 
+import CharacterSheetParser from './components/CharacterSheetParser';
+
+
 const CharRoute = () => {
   let { charId } = useParams();
   
@@ -32,6 +35,10 @@ const AppRoutes = () => {
       <Route path="/char/:charId">
         <CharRoute />
       </Route>
+
+      <Route path="/parser">
+        <CharacterSheetParser />
+      </Route>      
       
       <Route path={match.path}>
         <CharListLoader />
