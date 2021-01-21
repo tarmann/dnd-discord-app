@@ -15,14 +15,15 @@ import Row from 'react-bootstrap/Row';
 const FieldList = ({
   fields, 
   char,
-  onChangeField = () => {}
+  onChangeField = () => {},
+  onBlurField = () => {}
 }) => {
   return Object.keys(fields).map((attr, i) => {
     const fieldType = fields[attr].type === "textarea" ? "textarea" : "input";
     const rows = fields[attr].type === "textarea" ? 10 : null;
 
     return (
-      <Form.Group as={Row} controlId="formHorizontalEmail">
+      <Form.Group key={i} as={Row} controlId="formHorizontalEmail">
         <Form.Label column sm={3}>
           <strong className="attr-label">{fields[attr].label}</strong>
           <span className="attr-name">{attr}</span>
@@ -34,6 +35,7 @@ const FieldList = ({
             rows={rows}
             value={char[attr]}
             onChange={e => onChangeField(attr, e.target.value)}
+            onBlur={e => onBlurField(attr, e)}
           />
         </Col>
       </Form.Group>
@@ -41,7 +43,7 @@ const FieldList = ({
   })
 }
 
-const FieldGroup = ({ name, fields, char, onChangeField }) => (
+const FieldGroup = ({ name, fields, char, onChangeField, onBlurField }) => (
   <div className="field-group">
     <h4 className="field-group--title">{name}</h4>
     
@@ -49,20 +51,29 @@ const FieldGroup = ({ name, fields, char, onChangeField }) => (
       fields={fields}
       char={char}
       onChangeField={onChangeField}
+      onBlurField={onBlurField}
     />
   </div>
 )
 
-const CharacterSheet = ({ char, onChangeField, onSave }) => {
+const CharacterSheet = ({ char, isSaving, onChangeField, onBlurField, onSave }) => {
   const fieldGroupProps = {
     char,
-    onChangeField
+    onChangeField,
+    onBlurField
   }
 
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">{char.name} ({char.className} {char.level})</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          {char.name} ({char.className} {char.level})
+        </Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+          {isSaving
+            ? <Navbar.Text>saving...</Navbar.Text>
+            : null}
+        </Navbar.Collapse>
       </Navbar>
 
       <Container className="charater-sheet">
@@ -98,10 +109,6 @@ const CharacterSheet = ({ char, onChangeField, onSave }) => {
             <FieldGroup name="Notes" fields={fieldGroups["other"]} {...fieldGroupProps} />
           </Tab>
         </Tabs>
-
-        <div className="actions">
-          <button onClick={onSave}>Save</button>
-        </div>
       </Container>
     </div>
   )
