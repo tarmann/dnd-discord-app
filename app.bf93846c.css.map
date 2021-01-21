@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.css"],"names":[],"mappings":"AAAA,YACE,oBAAqB,CACrB,gBACF,CAEA,WACE,UACF","file":"app.bf93846c.css","sourceRoot":"../src","sourcesContent":[".attr-label {\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.attr-name {\n  color: #ccc;\n}\n"]}
